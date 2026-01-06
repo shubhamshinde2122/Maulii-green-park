@@ -39,7 +39,7 @@ export function Gallery() {
                             <motion.img
                                 src={img}
                                 alt={`Sanctuary Interior ${i}`}
-                                className="h-full w-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105"
+                                className="h-full w-full object-cover grayscale-0 [@media(hover:hover)]:grayscale transition-all duration-700 [@media(hover:hover)]:group-hover:grayscale-0 group-hover:scale-105"
                                 initial={{ scale: 1.2 }}
                                 whileInView={{ scale: 1.0 }}
                                 transition={{ duration: 1.5 }}

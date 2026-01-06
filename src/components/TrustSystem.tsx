@@ -73,7 +73,7 @@ export function TrustSystem() {
                     >
                         <div className="absolute inset-0 bg-midnight-silt/50 z-0" />
                         {/* Construction Progress Image */}
-                        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=2560&auto=format&fit=crop')] bg-cover bg-center opacity-40 grayscale group-hover:grayscale-0 transition-all duration-700" />
+                        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=2560&auto=format&fit=crop')] bg-cover bg-center opacity-40 grayscale-0 [@media(hover:hover)]:grayscale [@media(hover:hover)]:group-hover:grayscale-0 transition-all duration-700" />
 
                         <div className="relative z-10">
                             <UsersRound className="w-8 h-8 text-raw-silk mx-auto mb-4" />
