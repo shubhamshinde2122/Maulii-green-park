@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import TextReveal from "./TextReveal";
+import { Leaf } from "lucide-react";
 
 export function Story() {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -58,23 +59,31 @@ export function Story() {
                     </span>
                 </motion.div>
 
-                {/* Floating Particles */}
-                <div className="absolute inset-0 pointer-events-none">
+                {/* Floating Golden Leaves */}
+                <div className="absolute inset-0 pointer-events-none overflow-hidden">
                     {particles.map((p, i) => (
                         <motion.div
                             key={i}
-                            initial={{ x: `${p.x}vw`, y: `${p.y}vh`, opacity: 0 }}
+                            initial={{ x: `${p.x}vw`, y: `${p.y}vh`, opacity: 0, rotate: Math.random() * 360 }}
                             animate={{
-                                y: [`${p.y}vh`, `${p.y - 10}vh`, `${p.y}vh`],
-                                opacity: [0.1, 0.3, 0.1]
+                                y: [`${p.y}vh`, `${p.y + 20}vh`], // Slowly falling
+                                x: [`${p.x}vw`, `${p.x + (i % 2 === 0 ? 2 : -2)}vw`, `${p.x}vw`], // Gentle Sway
+                                rotate: [0, 45, -45, 0], // Gentle Rotation
+                                opacity: [0, 0.4, 0] // Fade in and out
                             }}
                             transition={{
                                 duration: p.duration,
                                 repeat: Infinity,
-                                ease: "easeInOut"
+                                ease: "linear",
+                                times: [0, 0.5, 1]
                             }}
-                            className="absolute w-1 h-1 bg-burnished-bronze rounded-full blur-[1px]"
-                        />
+                            className="absolute"
+                        >
+                            <Leaf
+                                className={`text-burnished-bronze/40 ${i % 3 === 0 ? "w-6 h-6" : i % 2 === 0 ? "w-4 h-4" : "w-3 h-3"}`}
+                                strokeWidth={1.5}
+                            />
+                        </motion.div>
                     ))}
                 </div>
 
