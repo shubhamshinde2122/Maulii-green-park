@@ -34,8 +34,8 @@ export function Story() {
 
     // Fade out EARLIER (at 90%) so we have time to show the Brand Name
     const contentOpacity = useTransform(scrollYProgress, [0.75, 0.9], [1, 0]);
-    // Fade in EARLIER and STRONGER (50%) for guarantee mobile visibility
-    const outroOpacity = useTransform(scrollYProgress, [0.6, 0.95], [0, 0.5]);
+    // Fade in animation (0 to 1) - Max intensity controlled by CSS classes below
+    const outroOpacity = useTransform(scrollYProgress, [0.65, 0.95], [0, 1]);
 
     return (
         <section ref={containerRef} className="relative h-[140vh] bg-midnight-silt overflow-hidden">
@@ -46,10 +46,11 @@ export function Story() {
                 {/* Warm Spotlight Gradient */}
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(165,126,81,0.15)_0%,_transparent_55%)] blur-3xl pointer-events-none" />
 
-                {/* Outro Brand Watermark (Fades in at end) - Centered on Mobile */}
+                {/* Outro Brand Watermark */}
                 <motion.div
                     style={{ opacity: outroOpacity }}
-                    className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-0 translate-y-0 md:translate-y-24"
+                    // Mobile: opacity-80 (strong), Desktop: opacity-10 (faint)
+                    className="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-10 translate-y-0 md:translate-y-24 opacity-80 md:opacity-10"
                 >
                     <span className="text-[12vw] md:text-[12vw] font-serif font-black text-center leading-none text-burnished-bronze uppercase tracking-widest">
                         MAULI<br />DEVELOPERS
