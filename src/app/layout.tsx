@@ -19,6 +19,7 @@ export const metadata: Metadata = {
   description: "Experience the art of modern living. Premium 3 & 4 BHK Residences.",
 };
 
+import ThemeManager from "@/components/ThemeManager";
 import { LanguageProvider } from "@/context/LanguageContext";
 import SmoothScroll from "@/components/SmoothScroll";
 
@@ -32,6 +33,7 @@ export default function RootLayout({
       <body
         className={`${cinzel.variable} ${manrope.variable} antialiased`}
       >
+        <ThemeManager />
         <SmoothScroll />
         <LanguageProvider>
           {children}

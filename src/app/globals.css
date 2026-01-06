@@ -14,6 +14,25 @@
   --font-sans: var(--font-manrope);
 }
 
+/* Day Mode (Sunlight) Overrides */
+[data-theme="day"] {
+  /* Swap Dark <-> Light for instant theme inversion */
+  --color-midnight-silt: #EBE9E4;
+  /* Raw Silk (Light) */
+  --color-raw-silk: #0F1115;
+  /* Midnight Silt (Dark) */
+
+  --color-charcoal: #D4CDC3;
+  /* Warm Stone (Light Grey) */
+  --color-warm-stone: #1A1D23;
+  /* Charcoal (Dark Grey) */
+
+  --color-burnished-bronze: #A68A5C;
+  /* Slightly Darker Bronze for visibility on light bg */
+  --color-mist: rgba(0, 0, 0, 0.1);
+  /* Dark Mist */
+}
+
 @layer base {
   body {
     background-color: var(--color-midnight-silt);
