@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useRef } from "react";
 import { Building2, UsersRound, Trophy } from "lucide-react";
+import TextReveal from "./TextReveal";
 
 const milestones = [
     { date: "Oct 2025", title: "Structure Complete", desc: "Roof slab casting finished." },
@@ -25,9 +26,8 @@ export function TrustSystem() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
-                    className="mb-8 md:mb-0" // Removed sticky, added spacing
                 >
-                    <h2 className="font-serif text-4xl text-raw-silk mb-2">The Journey</h2>
+                    <h2 className="font-serif text-4xl text-raw-silk mb-2"><TextReveal>The Journey</TextReveal></h2>
                     <p className="text-warm-stone/60 font-sans tracking-wide">Radical Transparency.</p>
                 </motion.div>
 

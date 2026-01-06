@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 import { useLanguage } from "@/context/LanguageContext";
+import TextReveal from "./TextReveal";
 
 export function Story() {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -92,7 +93,7 @@ export function Story() {
                             {t.story.title}
                         </span>
                         <h2 className="font-serif text-4xl md:text-6xl text-raw-silk leading-tight bg-clip-text text-transparent bg-gradient-to-b from-raw-silk to-warm-stone">
-                            {t.story.heading}
+                            <TextReveal>{t.story.heading}</TextReveal>
                         </h2>
                     </motion.div>
 

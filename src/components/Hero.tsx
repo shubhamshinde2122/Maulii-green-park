@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { ChevronDown, Globe } from "lucide-react";
 import { useRef } from "react";
 import { useLanguage } from "@/context/LanguageContext";
+import TextReveal from "./TextReveal";
 
 export function Hero() {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -63,7 +64,7 @@ export function Hero() {
                     className="space-y-6"
                 >
                     <h1 className="font-serif text-5xl md:text-8xl tracking-[0.1em] text-raw-silk uppercase font-light text-center leading-tight">
-                        Mauli Green Park
+                        <TextReveal>Mauli Green Park</TextReveal>
                     </h1>
 
                     {/* Translated Content */}
