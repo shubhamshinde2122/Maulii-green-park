@@ -34,8 +34,8 @@ export function Story() {
 
     // Fade out EARLIER (at 90%) so we have time to show the Brand Name
     const contentOpacity = useTransform(scrollYProgress, [0.75, 0.9], [1, 0]);
-    // Fade IN earlier and stronger (20%) for mobile visibility
-    const outroOpacity = useTransform(scrollYProgress, [0.75, 0.95], [0, 0.2]);
+    // Fade in EARLIER and STRONGER (50%) for guarantee mobile visibility
+    const outroOpacity = useTransform(scrollYProgress, [0.6, 0.95], [0, 0.5]);
 
     return (
         <section ref={containerRef} className="relative h-[140vh] bg-midnight-silt overflow-hidden">
