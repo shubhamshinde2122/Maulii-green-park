@@ -20,6 +20,7 @@ export const metadata: Metadata = {
 };
 
 import { LanguageProvider } from "@/context/LanguageContext";
+import SmoothScroll from "@/components/SmoothScroll";
 
 export default function RootLayout({
   children,
@@ -30,8 +31,8 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${cinzel.variable} ${manrope.variable} antialiased`}
-        suppressHydrationWarning
       >
+        <SmoothScroll />
         <LanguageProvider>
           {children}
         </LanguageProvider>
