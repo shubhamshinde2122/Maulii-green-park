@@ -55,7 +55,7 @@ export function ConstructionUpdates() {
                                     transition={{ duration: 0.7 }}
                                     src={item.image}
                                     alt={item.title}
-                                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                                    className="w-full h-full object-cover grayscale-0 [@media(hover:hover)]:grayscale [@media(hover:hover)]:group-hover:grayscale-0 transition-all duration-700"
                                 />
                                 <div className="absolute top-4 left-4 z-20 bg-midnight-silt/80 backdrop-blur-md px-3 py-1 rounded-sm border border-mist/20">
                                     <span className="text-xs text-raw-silk tracking-widest uppercase">{item.date}</span>
