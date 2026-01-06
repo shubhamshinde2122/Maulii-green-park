@@ -20,10 +20,16 @@ export function TrustSystem() {
 
             {/* 1. Construction Timeline */}
             <div className="max-w-6xl mx-auto mb-32 grid grid-cols-1 md:grid-cols-2 gap-12">
-                <div className="sticky top-24 self-start">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
+                    className="mb-8 md:mb-0" // Removed sticky, added spacing
+                >
                     <h2 className="font-serif text-4xl text-raw-silk mb-2">The Journey</h2>
                     <p className="text-warm-stone/60 font-sans tracking-wide">Radical Transparency.</p>
-                </div>
+                </motion.div>
 
                 <div className="relative border-l border-mist pl-8 space-y-16">
                     {milestones.map((item, i) => (
