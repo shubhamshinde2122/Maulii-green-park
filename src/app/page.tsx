@@ -31,8 +31,8 @@ export default function Home() {
       <Concierge />
       <WhatsAppWidget />
 
-      {/* Simple Footer Spacer */}
-      <footer className="py-12 bg-charcoal text-center text-warm-stone/20 text-xs tracking-widest uppercase border-t border-mist/5">
+      {/* Simple Footer Spacer - Added pb-36 for mobile to clear floating widgets */}
+      <footer className="pt-12 pb-36 md:pb-12 bg-charcoal text-center text-warm-stone/20 text-xs tracking-widest uppercase border-t border-mist/5">
         <p>© 2026 Mauli Developers. All Rights Reserved.</p>
         <div className="mt-4 flex items-center justify-center gap-2">
           <span className="opacity-50">Our Group Venture:</span>
