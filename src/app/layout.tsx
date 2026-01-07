@@ -21,7 +21,6 @@ export const metadata: Metadata = {
 
 import ThemeManager from "@/components/ThemeManager";
 import { LanguageProvider } from "@/context/LanguageContext";
-import SmoothScroll from "@/components/SmoothScroll";
 
 export default function RootLayout({
   children,
@@ -34,7 +33,6 @@ export default function RootLayout({
         className={`${cinzel.variable} ${manrope.variable} antialiased`}
       >
         <ThemeManager />
-        <SmoothScroll />
         <LanguageProvider>
           {children}
         </LanguageProvider>
