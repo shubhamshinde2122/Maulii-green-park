@@ -28,7 +28,7 @@ export function Hero() {
             >
                 <button
                     onClick={() => setLanguage(language === "en" ? "mr" : "en")}
-                    className="flex items-center gap-2 px-4 py-2 bg-black/20 backdrop-blur-md border border-white/10 rounded-full text-raw-silk text-sm uppercase tracking-widest hover:bg-black/40 transition-colors"
+                    className="flex items-center gap-2 px-4 py-2 bg-black/20 backdrop-blur-md border border-white/10 rounded-full text-[#EBE9E4] text-sm uppercase tracking-widest hover:bg-black/40 transition-colors"
                 >
                     <Globe className="w-4 h-4" />
                     <span>{language === "en" ? "मराठा" : "English"}</span>
@@ -63,7 +63,7 @@ export function Hero() {
                     transition={{ duration: 1.5, ease: [0.25, 1, 0.5, 1], delay: 0.5 }}
                     className="space-y-6"
                 >
-                    <h1 className="font-serif text-5xl md:text-8xl tracking-[0.1em] text-raw-silk uppercase font-light text-center leading-tight drop-shadow-2xl">
+                    <h1 className="font-serif text-5xl md:text-8xl tracking-[0.1em] text-[#EBE9E4] uppercase font-light text-center leading-tight drop-shadow-2xl">
                         <TextReveal>Mauli Green Park</TextReveal>
                     </h1>
 
@@ -72,12 +72,12 @@ export function Hero() {
                         <p className="font-serif text-xl md:text-2xl text-burnished-bronze italic drop-shadow-md">
                             {t.hero.title}
                         </p>
-                        <p className="font-sans text-sm md:text-base tracking-[0.2em] text-warm-stone/80 uppercase max-w-2xl mx-auto drop-shadow-sm">
+                        <p className="font-sans text-sm md:text-base tracking-[0.2em] text-[#D4CDC3]/80 uppercase max-w-2xl mx-auto drop-shadow-sm">
                             {t.hero.subtitle}
                         </p>
                     </div>
 
-                    <button className="mt-8 px-8 py-3 border border-raw-silk/30 hover:bg-raw-silk hover:text-midnight-silt text-raw-silk uppercase tracking-widest text-xs transition-all duration-500">
+                    <button className="mt-8 px-8 py-3 border border-[#EBE9E4]/30 hover:bg-[#EBE9E4] hover:text-midnight-silt text-[#EBE9E4] uppercase tracking-widest text-xs transition-all duration-500">
                         {t.hero.cta}
                     </button>
                 </motion.div>
