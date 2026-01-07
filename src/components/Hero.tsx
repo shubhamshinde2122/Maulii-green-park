@@ -40,7 +40,7 @@ export function Hero() {
                 viewport={{ once: true }}
                 className="absolute inset-0 z-0"
             >
-                <div className="absolute inset-0 bg-black/40 z-10" />
+                <div className="absolute inset-0 bg-black/60 z-10" />
                 <video
                     autoPlay
                     muted
@@ -63,16 +63,16 @@ export function Hero() {
                     transition={{ duration: 1.5, ease: [0.25, 1, 0.5, 1], delay: 0.5 }}
                     className="space-y-6"
                 >
-                    <h1 className="font-serif text-5xl md:text-8xl tracking-[0.1em] text-raw-silk uppercase font-light text-center leading-tight">
+                    <h1 className="font-serif text-5xl md:text-8xl tracking-[0.1em] text-raw-silk uppercase font-light text-center leading-tight drop-shadow-2xl">
                         <TextReveal>Mauli Green Park</TextReveal>
                     </h1>
 
                     {/* Translated Content */}
                     <div className="space-y-2">
-                        <p className="font-serif text-xl md:text-2xl text-burnished-bronze italic">
+                        <p className="font-serif text-xl md:text-2xl text-burnished-bronze italic drop-shadow-md">
                             {t.hero.title}
                         </p>
-                        <p className="font-sans text-sm md:text-base tracking-[0.2em] text-warm-stone/80 uppercase max-w-2xl mx-auto">
+                        <p className="font-sans text-sm md:text-base tracking-[0.2em] text-warm-stone/80 uppercase max-w-2xl mx-auto drop-shadow-sm">
                             {t.hero.subtitle}
                         </p>
                     </div>
