@@ -13,9 +13,38 @@ export function Concierge() {
     const [config, setConfig] = useState("3 Bedroom");
     const [contact, setContact] = useState("");
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setTimeout(() => setIsSuccess(true), 1500); // Simulate API
+
+        // Dynamically import constant
+        const { WEB3FORMS_ACCESS_KEY } = await import("@/lib/constants");
+
+        try {
+            const formData = new FormData(e.currentTarget);
+            const data = Object.fromEntries(formData);
+
+            const response = await fetch("https://api.web3forms.com/submit", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                },
+                body: JSON.stringify({
+                    access_key: WEB3FORMS_ACCESS_KEY,
+                    ...data,
+                    subject: `New Concierge Request: ${name}`,
+                }),
+            });
+
+            const result = await response.json();
+            if (result.success) {
+                setIsSuccess(true);
+            } else {
+                alert("Something went wrong. Please try again.");
+            }
+        } catch (error) {
+            alert("Error sending request. Please check your connection.");
+        }
     };
 
     return (
@@ -72,6 +101,7 @@ export function Concierge() {
                                             Hello, my name is{" "}
                                             <input
                                                 type="text"
+                                                name="name"
                                                 placeholder="Your Name"
                                                 value={name}
                                                 onChange={(e) => setName(e.target.value)}
@@ -83,6 +113,7 @@ export function Concierge() {
                                         <p className="mt-8">
                                             I am interested in a{" "}
                                             <select
+                                                name="size"
                                                 value={config}
                                                 onChange={(e) => setConfig(e.target.value)}
                                                 className="bg-transparent border-b border-warm-stone/30 focus:border-burnished-bronze outline-none text-raw-silk w-48 appearance-none cursor-pointer hover:text-burnished-bronze transition-colors"
@@ -99,6 +130,7 @@ export function Concierge() {
                                             at{" "}
                                             <input
                                                 type="tel"
+                                                name="contact"
                                                 placeholder="Phone Number"
                                                 value={contact}
                                                 onChange={(e) => setContact(e.target.value)}

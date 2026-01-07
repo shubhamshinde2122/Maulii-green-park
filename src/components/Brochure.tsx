@@ -7,15 +7,43 @@ import { useState } from "react";
 export function Brochure() {
     const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setStatus("submitting");
-        // Simulate delay
-        setTimeout(() => {
-            setStatus("success");
-            // Reset after 3s
-            setTimeout(() => setStatus("idle"), 3000);
-        }, 1500);
+
+        const form = e.currentTarget;
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData);
+
+        // Dynamically import constant to avoid build issues before file exists
+        const { WEB3FORMS_ACCESS_KEY } = await import("@/lib/constants");
+
+        try {
+            const response = await fetch("https://api.web3forms.com/submit", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                },
+                body: JSON.stringify({
+                    access_key: WEB3FORMS_ACCESS_KEY,
+                    ...data,
+                    subject: "New Brochure Request - Mauli Green Park",
+                }),
+            });
+            const result = await response.json();
+            if (result.success) {
+                setStatus("success");
+                setTimeout(() => setStatus("idle"), 5000);
+                form.reset();
+            } else {
+                alert("Something went wrong. Please try again.");
+                setStatus("idle");
+            }
+        } catch (error) {
+            alert("Error sending request. Please check your connection.");
+            setStatus("idle");
+        }
     };
 
     return (
