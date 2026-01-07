@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Download, FileText, CheckCircle2 } from "lucide-react";
 import { useState } from "react";
+import { WEB3FORMS_ACCESS_KEY } from "@/lib/constants";
 
 export function Brochure() {
     const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
@@ -11,14 +12,13 @@ export function Brochure() {
         e.preventDefault();
         setStatus("submitting");
 
-        const form = e.currentTarget;
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData);
-
-        // Dynamically import constant to avoid build issues before file exists
-        const { WEB3FORMS_ACCESS_KEY } = await import("@/lib/constants");
-
         try {
+            const form = e.currentTarget;
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+
+            console.log("Submitting Brochure Form with Key:", WEB3FORMS_ACCESS_KEY);
+
             const response = await fetch("https://api.web3forms.com/submit", {
                 method: "POST",
                 headers: {
@@ -31,17 +31,21 @@ export function Brochure() {
                     subject: "New Brochure Request - Mauli Green Park",
                 }),
             });
+
             const result = await response.json();
-            if (result.success) {
+
+            if (response.ok && result.success) {
                 setStatus("success");
                 setTimeout(() => setStatus("idle"), 5000);
                 form.reset();
             } else {
-                alert("Something went wrong. Please try again.");
+                console.error("Web3Forms API Error:", result);
+                alert(`Submission Failed: ${result.message || "Please check your network."}`);
                 setStatus("idle");
             }
         } catch (error) {
-            alert("Error sending request. Please check your connection.");
+            console.error("Submission Network Error:", error);
+            alert("Connection Error. Please try again.");
             setStatus("idle");
         }
     };
@@ -106,6 +110,7 @@ export function Brochure() {
                                 <label className="block text-xs text-mist uppercase tracking-widest mb-2">Full Name</label>
                                 <input
                                     type="text"
+                                    name="name"
                                     required
                                     className="w-full bg-charcoal border border-mist/10 focus:border-burnished-bronze text-raw-silk px-4 py-3 rounded-sm outline-none transition-colors placeholder:text-warm-stone/20"
                                     placeholder="e.g. Rahul Patil"
@@ -115,6 +120,7 @@ export function Brochure() {
                                 <label className="block text-xs text-mist uppercase tracking-widest mb-2">WhatsApp Number</label>
                                 <input
                                     type="tel"
+                                    name="phone"
                                     required
                                     className="w-full bg-charcoal border border-mist/10 focus:border-burnished-bronze text-raw-silk px-4 py-3 rounded-sm outline-none transition-colors placeholder:text-warm-stone/20"
                                     placeholder="+91 00000 00000"

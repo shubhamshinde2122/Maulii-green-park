@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageSquareText, X, Check } from "lucide-react";
+import { WEB3FORMS_ACCESS_KEY } from "@/lib/constants";
 
 export function Concierge() {
     const [isOpen, setIsOpen] = useState(false);
@@ -16,12 +17,11 @@ export function Concierge() {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        // Dynamically import constant
-        const { WEB3FORMS_ACCESS_KEY } = await import("@/lib/constants");
-
         try {
             const formData = new FormData(e.currentTarget);
             const data = Object.fromEntries(formData);
+
+            console.log("Submitting Concierge Form with Key:", WEB3FORMS_ACCESS_KEY);
 
             const response = await fetch("https://api.web3forms.com/submit", {
                 method: "POST",
@@ -37,13 +37,16 @@ export function Concierge() {
             });
 
             const result = await response.json();
-            if (result.success) {
+
+            if (response.ok && result.success) {
                 setIsSuccess(true);
             } else {
-                alert("Something went wrong. Please try again.");
+                console.error("Web3Forms API Error:", result);
+                alert(`Submission Failed: ${result.message || "Please check your network."}`);
             }
         } catch (error) {
-            alert("Error sending request. Please check your connection.");
+            console.error("Submission Network Error:", error);
+            alert("Connection Error. Please try again.");
         }
     };
 
