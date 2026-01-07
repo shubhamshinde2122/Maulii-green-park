@@ -45,7 +45,6 @@ import ThemeManager from "@/components/ThemeManager";
 import { LanguageProvider } from "@/context/LanguageContext";
 import Preloader from "@/components/Preloader";
 import FilmGrain from "@/components/FilmGrain";
-import AudioAmbiance from "@/components/AudioAmbiance";
 
 export default function RootLayout({
   children,
@@ -59,7 +58,6 @@ export default function RootLayout({
       >
         <Preloader />
         <FilmGrain />
-        <AudioAmbiance />
         <ThemeManager />
         <LanguageProvider>
           {children}
