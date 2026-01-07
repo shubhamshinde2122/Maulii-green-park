@@ -43,6 +43,8 @@ export const metadata: Metadata = {
 
 import ThemeManager from "@/components/ThemeManager";
 import { LanguageProvider } from "@/context/LanguageContext";
+import Preloader from "@/components/Preloader";
+import FilmGrain from "@/components/FilmGrain";
 
 export default function RootLayout({
   children,
@@ -52,8 +54,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${cinzel.variable} ${manrope.variable} antialiased`}
+        className={`${cinzel.variable} ${manrope.variable} antialiased selection:bg-raw-silk selection:text-midnight-silt`}
       >
+        <Preloader />
+        <FilmGrain />
         <ThemeManager />
         <LanguageProvider>
           {children}

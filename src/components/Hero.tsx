@@ -5,6 +5,7 @@ import { ChevronDown, Globe } from "lucide-react";
 import { useRef } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import TextReveal from "./TextReveal";
+import MagneticButton from "./MagneticButton";
 
 export function Hero() {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -77,9 +78,9 @@ export function Hero() {
                         </p>
                     </div>
 
-                    <button className="mt-8 px-8 py-3 border border-[#EBE9E4]/30 hover:bg-[#EBE9E4] hover:text-midnight-silt text-[#EBE9E4] uppercase tracking-widest text-xs transition-all duration-500">
+                    <MagneticButton className="mt-8 px-8 py-3 border border-[#EBE9E4]/30 bg-transparent text-[#EBE9E4] uppercase tracking-widest text-xs hover:bg-[#EBE9E4] hover:text-midnight-silt transition-colors">
                         {t.hero.cta}
-                    </button>
+                    </MagneticButton>
                 </motion.div>
             </motion.div>
 

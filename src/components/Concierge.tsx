@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageSquareText, X, Check } from "lucide-react";
 import { WEB3FORMS_ACCESS_KEY } from "@/lib/constants";
+import MagneticButton from "./MagneticButton";
 
 export function Concierge() {
     const [isOpen, setIsOpen] = useState(false);
@@ -53,16 +54,20 @@ export function Concierge() {
     return (
         <>
             {/* Sticky Trigger */}
-            <motion.button
+            <motion.div
                 initial={{ y: 100 }}
                 animate={{ y: 0 }}
                 transition={{ delay: 2 }}
-                onClick={() => setIsOpen(true)}
-                className="fixed bottom-8 right-8 z-50 flex items-center gap-3 bg-raw-silk text-midnight-silt px-6 py-3 rounded-full shadow-2xl hover:bg-white transition-colors"
+                className="fixed bottom-8 right-8 z-50"
             >
-                <span className="text-sm font-bold tracking-widest uppercase">Private Viewing</span>
-                <MessageSquareText className="w-4 h-4" />
-            </motion.button>
+                <MagneticButton
+                    onClick={() => setIsOpen(true)}
+                    className="flex items-center gap-3 bg-raw-silk text-midnight-silt px-6 py-3 rounded-full shadow-2xl hover:bg-white transition-colors"
+                >
+                    <span className="text-sm font-bold tracking-widest uppercase">Private Viewing</span>
+                    <MessageSquareText className="w-4 h-4" />
+                </MagneticButton>
+            </motion.div>
 
             {/* Drawer Overlay */}
             <AnimatePresence>
