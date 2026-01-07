@@ -6,21 +6,11 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export default function AudioAmbiance() {
     const [isPlaying, setIsPlaying] = useState(false);
-    const audioRef = useRef<HTMLAudioElement | null>(null);
+    const audioRef = useRef<HTMLAudioElement>(null);
 
-    useEffect(() => {
-        // Create audio instance
-        audioRef.current = new Audio("https://cdn.pixabay.com/download/audio/2021/08/09/audio_88447e769f.mp3?filename=forest-birds-11270.mp3");
-        audioRef.current.loop = true;
-        audioRef.current.volume = 0.3; // Low background volume
-
-        return () => {
-            if (audioRef.current) {
-                audioRef.current.pause();
-                audioRef.current = null;
-            }
-        };
-    }, []);
+    // Reliable Source: Wikimedia Commons (Creative Commons 0 or Attribution)
+    // Forest/Nature sound
+    const audioSrc = "https://upload.wikimedia.org/wikipedia/commons/e/e5/Forest_Ambience.ogg";
 
     const toggleAudio = () => {
         if (!audioRef.current) return;
@@ -29,14 +19,25 @@ export default function AudioAmbiance() {
             audioRef.current.pause();
             setIsPlaying(false);
         } else {
-            // User interaction required to play
-            audioRef.current.play().catch((err) => console.error("Audio Play Error:", err));
-            setIsPlaying(true);
+            audioRef.current.play()
+                .then(() => setIsPlaying(true))
+                .catch((err) => {
+                    console.error("Audio Playback Error:", err);
+                    alert("Could not play audio. Please check browser permissions.");
+                });
         }
     };
 
+    useEffect(() => {
+        if (audioRef.current) {
+            audioRef.current.volume = 0.4;
+        }
+    }, []);
+
     return (
-        <div className="fixed bottom-8 left-8 z-50">
+        <div className="fixed bottom-8 left-8 z-[100]">
+            <audio ref={audioRef} src={audioSrc} loop hidden />
+
             <motion.button
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
@@ -50,12 +51,11 @@ export default function AudioAmbiance() {
             >
                 {isPlaying ? (
                     <>
-                        <Volume2 className="w-5 h-5" />
-                        {/* Visualizer rings */}
+                        <Volume2 className="w-5 h-5 relative z-10" />
                         <motion.div
                             className="absolute inset-0 rounded-full border border-burnished-bronze opacity-50"
                             animate={{ scale: [1, 1.5], opacity: [0.5, 0] }}
-                            transition={{ duration: 2, repeat: Infinity }}
+                            transition={{ duration: 1.5, repeat: Infinity }}
                         />
                     </>
                 ) : (
@@ -63,7 +63,6 @@ export default function AudioAmbiance() {
                 )}
             </motion.button>
 
-            {/* Tooltip hint initially */}
             <AnimatePresence>
                 {!isPlaying && (
                     <motion.div
@@ -71,10 +70,10 @@ export default function AudioAmbiance() {
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -10 }}
                         transition={{ delay: 2, duration: 1 }}
-                        className="absolute left-16 top-1/2 -translate-y-1/2 whitespace-nowrap"
+                        className="absolute left-16 top-1/2 -translate-y-1/2 whitespace-nowrap bg-black/50 px-2 py-1 rounded backdrop-blur-sm pointer-events-none"
                     >
-                        <span className="text-[10px] uppercase tracking-widest text-burnished-bronze/60">
-                            Serenity Mode
+                        <span className="text-[10px] uppercase tracking-widest text-[#EBE9E4]">
+                            Sound On
                         </span>
                     </motion.div>
                 )}
