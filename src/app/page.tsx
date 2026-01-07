@@ -12,12 +12,14 @@ import { Lifestyle } from "@/components/Lifestyle";
 import { FAQ } from "@/components/FAQ";
 import { BeforeAfter } from "@/components/BeforeAfter";
 import { WhatsAppWidget } from "@/components/WhatsAppWidget";
+import { SiteChronicle } from "@/components/SiteChronicle";
 
 export default function Home() {
   return (
     <main className="bg-midnight-silt min-h-screen">
       <Hero />
       <TrustSystem />
+      <SiteChronicle />
       <Story />
       <Brochure />
       <MasterPlan />
