@@ -9,6 +9,9 @@ export default function AudioAmbiance() {
     const [error, setError] = useState(false);
     const audioRef = useRef<HTMLAudioElement>(null);
 
+    // Fallback Source: Mixkit (MP3) - usually very reliable
+    const audioSrc = "https://assets.mixkit.co/active_storage/sfx/243/243-preview.mp3";
+
     const toggleAudio = () => {
         if (!audioRef.current) return;
 
@@ -16,7 +19,6 @@ export default function AudioAmbiance() {
             audioRef.current.pause();
             setIsPlaying(false);
         } else {
-            // Create a promise to handle play result
             const playPromise = audioRef.current.play();
 
             if (playPromise !== undefined) {
@@ -42,11 +44,16 @@ export default function AudioAmbiance() {
 
     return (
         <div className="fixed bottom-8 left-8 z-[100]">
-            {/* Fallback Sources: Google Sounds (Reliable) + Wikimedia */}
-            <audio ref={audioRef} loop hidden>
-                <source src="https://actions.google.com/sounds/v1/ambiences/forest_morning.ogg" type="audio/ogg" />
-                <source src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Forest_Ambience.ogg" type="audio/ogg" />
-            </audio>
+            <audio
+                ref={audioRef}
+                src={audioSrc}
+                loop
+                preload="auto"
+                onError={(e) => {
+                    console.error("Audio Load Error:", e);
+                    setError(true);
+                }}
+            />
 
             <motion.button
                 initial={{ scale: 0 }}
@@ -66,7 +73,6 @@ export default function AudioAmbiance() {
                 ) : isPlaying ? (
                     <>
                         <Volume2 className="w-5 h-5 relative z-10" />
-                        {/* Fake Visualizer (CSS only, no CORS needed) */}
                         <motion.div
                             className="absolute inset-0 rounded-full border border-burnished-bronze opacity-50"
                             animate={{ scale: [1, 1.5], opacity: [0.5, 0] }}
@@ -77,22 +83,6 @@ export default function AudioAmbiance() {
                     <VolumeX className="w-5 h-5" />
                 )}
             </motion.button>
-
-            <AnimatePresence>
-                {!isPlaying && !error && (
-                    <motion.div
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: -10 }}
-                        transition={{ delay: 2, duration: 1 }}
-                        className="absolute left-16 top-1/2 -translate-y-1/2 whitespace-nowrap bg-black/50 px-2 py-1 rounded backdrop-blur-sm pointer-events-none"
-                    >
-                        <span className="text-[10px] uppercase tracking-widest text-[#EBE9E4]">
-                            Sound On
-                        </span>
-                    </motion.div>
-                )}
-            </AnimatePresence>
         </div>
     );
 }
