@@ -9,9 +9,6 @@ export default function AudioAmbiance() {
     const [error, setError] = useState(false);
     const audioRef = useRef<HTMLAudioElement>(null);
 
-    // Reliable Source: Pixabay (MP3 is safer than OGG for Safari/iOS)
-    const audioSrc = "https://cdn.pixabay.com/audio/2022/03/24/audio_3d183f0724.mp3"; // Gentle Nature/Forest
-
     const toggleAudio = () => {
         if (!audioRef.current) return;
 
@@ -19,6 +16,7 @@ export default function AudioAmbiance() {
             audioRef.current.pause();
             setIsPlaying(false);
         } else {
+            // Create a promise to handle play result
             const playPromise = audioRef.current.play();
 
             if (playPromise !== undefined) {
@@ -31,7 +29,6 @@ export default function AudioAmbiance() {
                         console.error("Audio Playback Error:", err);
                         setIsPlaying(false);
                         setError(true);
-                        // Don't alert, just show UI state
                     });
             }
         }
@@ -45,8 +42,11 @@ export default function AudioAmbiance() {
 
     return (
         <div className="fixed bottom-8 left-8 z-[100]">
-            {/* MP3 source with crossOrigin */}
-            <audio ref={audioRef} src={audioSrc} loop hidden crossOrigin="anonymous" />
+            {/* Fallback Sources: Google Sounds (Reliable) + Wikimedia */}
+            <audio ref={audioRef} loop hidden>
+                <source src="https://actions.google.com/sounds/v1/ambiences/forest_morning.ogg" type="audio/ogg" />
+                <source src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Forest_Ambience.ogg" type="audio/ogg" />
+            </audio>
 
             <motion.button
                 initial={{ scale: 0 }}
@@ -66,6 +66,7 @@ export default function AudioAmbiance() {
                 ) : isPlaying ? (
                     <>
                         <Volume2 className="w-5 h-5 relative z-10" />
+                        {/* Fake Visualizer (CSS only, no CORS needed) */}
                         <motion.div
                             className="absolute inset-0 rounded-full border border-burnished-bronze opacity-50"
                             animate={{ scale: [1, 1.5], opacity: [0.5, 0] }}
