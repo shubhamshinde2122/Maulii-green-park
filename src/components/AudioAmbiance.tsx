@@ -1,16 +1,16 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Volume2, VolumeX } from "lucide-react";
+import { Volume2, VolumeX, AlertCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function AudioAmbiance() {
     const [isPlaying, setIsPlaying] = useState(false);
+    const [error, setError] = useState(false);
     const audioRef = useRef<HTMLAudioElement>(null);
 
-    // Reliable Source: Wikimedia Commons (Creative Commons 0 or Attribution)
-    // Forest/Nature sound
-    const audioSrc = "https://upload.wikimedia.org/wikipedia/commons/e/e5/Forest_Ambience.ogg";
+    // Reliable Source: Pixabay (MP3 is safer than OGG for Safari/iOS)
+    const audioSrc = "https://cdn.pixabay.com/audio/2022/03/24/audio_3d183f0724.mp3"; // Gentle Nature/Forest
 
     const toggleAudio = () => {
         if (!audioRef.current) return;
@@ -19,24 +19,34 @@ export default function AudioAmbiance() {
             audioRef.current.pause();
             setIsPlaying(false);
         } else {
-            audioRef.current.play()
-                .then(() => setIsPlaying(true))
-                .catch((err) => {
-                    console.error("Audio Playback Error:", err);
-                    alert("Could not play audio. Please check browser permissions.");
-                });
+            const playPromise = audioRef.current.play();
+
+            if (playPromise !== undefined) {
+                playPromise
+                    .then(() => {
+                        setIsPlaying(true);
+                        setError(false);
+                    })
+                    .catch((err) => {
+                        console.error("Audio Playback Error:", err);
+                        setIsPlaying(false);
+                        setError(true);
+                        // Don't alert, just show UI state
+                    });
+            }
         }
     };
 
     useEffect(() => {
         if (audioRef.current) {
-            audioRef.current.volume = 0.4;
+            audioRef.current.volume = 0.5;
         }
     }, []);
 
     return (
         <div className="fixed bottom-8 left-8 z-[100]">
-            <audio ref={audioRef} src={audioSrc} loop hidden />
+            {/* MP3 source with crossOrigin */}
+            <audio ref={audioRef} src={audioSrc} loop hidden crossOrigin="anonymous" />
 
             <motion.button
                 initial={{ scale: 0 }}
@@ -46,10 +56,14 @@ export default function AudioAmbiance() {
                 onClick={toggleAudio}
                 className={`relative w-12 h-12 rounded-full flex items-center justify-center shadow-2xl transition-all duration-500 border border-white/10 ${isPlaying
                         ? "bg-burnished-bronze text-midnight-silt"
-                        : "bg-midnight-silt/80 text-white/50 backdrop-blur-md"
+                        : error
+                            ? "bg-red-500/20 text-red-400 border-red-500/50"
+                            : "bg-midnight-silt/80 text-white/50 backdrop-blur-md"
                     }`}
             >
-                {isPlaying ? (
+                {error ? (
+                    <AlertCircle className="w-5 h-5" />
+                ) : isPlaying ? (
                     <>
                         <Volume2 className="w-5 h-5 relative z-10" />
                         <motion.div
@@ -64,7 +78,7 @@ export default function AudioAmbiance() {
             </motion.button>
 
             <AnimatePresence>
-                {!isPlaying && (
+                {!isPlaying && !error && (
                     <motion.div
                         initial={{ opacity: 0, x: -10 }}
                         animate={{ opacity: 1, x: 0 }}
