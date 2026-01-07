@@ -86,7 +86,7 @@ export function MasterPlan() {
                     {/* Interactive Map */}
                     <div className="lg:col-span-2 relative aspect-[4/3] min-h-[400px] bg-charcoal rounded-sm overflow-hidden border border-mist/20 group">
                         {/* Background Image: Aerial Park View */}
-                        <div className={`absolute inset-0 bg-[url('/images/client/uploaded_image_1_1767759122908.jpg')] bg-cover bg-center transition-all duration-700 ${activeId ? "brightness-[0.3] grayscale-[0.2]" : "brightness-[0.6] grayscale-0 [@media(hover:hover)]:grayscale"}`} />
+                        <div className={`absolute inset-0 bg-[url('https://images.unsplash.com/photo-1558036117-15d82a90b9b1?q=80&w=2560&auto=format&fit=crop')] bg-cover bg-center transition-all duration-700 ${activeId ? "brightness-[0.3] grayscale-[0.2]" : "brightness-[0.6] grayscale-0 [@media(hover:hover)]:grayscale"}`} />
 
                         {/* Hotspots */}
                         {amenities.map((item) => (

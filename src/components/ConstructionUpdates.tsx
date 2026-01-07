@@ -6,20 +6,20 @@ const updates = [
     {
         id: 1,
         date: "Jan 2026",
-        title: "Structure Ready",
-        image: "/images/client/uploaded_image_0_1767759122908.jpg"
+        title: "11th Floor Slab Completed",
+        image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1600&auto=format&fit=crop"
     },
     {
         id: 2,
         date: "Dec 2025",
-        title: "Landscape Development",
-        image: "/images/client/uploaded_image_2_1767759122908.jpg"
+        title: "Brick Work in Progress",
+        image: "https://images.unsplash.com/photo-1590069261209-f8e9b8642343?q=80&w=1600&auto=format&fit=crop"
     },
     {
         id: 3,
         date: "Nov 2025",
-        title: "Building Elevation",
-        image: "/images/client/uploaded_image_3_1767759122908.jpg"
+        title: "Podium Level Ready",
+        image: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=1600&auto=format&fit=crop"
     },
 ];
 
