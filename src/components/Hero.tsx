@@ -64,7 +64,7 @@ export function Hero() {
                     transition={{ duration: 1.5, ease: [0.25, 1, 0.5, 1], delay: 0.5 }}
                     className="space-y-6"
                 >
-                    <h1 className="font-serif text-5xl md:text-8xl tracking-[0.1em] text-[#EBE9E4] uppercase font-light text-center leading-tight drop-shadow-2xl">
+                    <h1 className="font-serif text-5xl md:text-8xl tracking-[0.1em] text-gold-foil uppercase font-light text-center leading-tight drop-shadow-2xl">
                         <TextReveal>Mauli Green Park</TextReveal>
                     </h1>
 
