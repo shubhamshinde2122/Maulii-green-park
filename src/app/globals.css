@@ -65,23 +65,3 @@
     color: var(--color-midnight-silt);
   }
 }
-
-@layer utilities {
-  .text-gold-foil {
-    @apply text-transparent bg-clip-text;
-    background-image: linear-gradient(to right,
-        #B8860B 0%,
-        #D19A66 25%,
-        #FBF5B7 50%,
-        #D19A66 75%,
-        #B8860B 100%);
-    background-size: 200% auto;
-    animation: shine 5s linear infinite;
-  }
-}
-
-@keyframes shine {
-  to {
-    background-position: 200% center;
-  }
-}
